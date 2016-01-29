@@ -26,6 +26,11 @@ var GetAgent = function(args){
     return null;
 };
 
+http.globalAgent.maxSockets = Infinity;
+process.on('uncaughtException', function(err) {
+    console.error('Caught uncaughtException: ' + err, err.stack);
+});
+
 var port = argv.port || 6060;
 var agent = GetAgent(argv);
 var server = http.createServer(function(req, resp) {
